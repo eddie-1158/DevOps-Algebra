@@ -61,7 +61,7 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Izgradnja slike (lokalno)
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./${{ matrix.service }}
           file: ./${{ matrix.service }}/Containerfile
@@ -101,7 +101,7 @@ jobs:
 
       - name: Objava slike u registar
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./${{ matrix.service }}
           file: ./${{ matrix.service }}/Containerfile
@@ -130,7 +130,7 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Izgradnja i objava s latest oznakom
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./${{ matrix.service }}
           file: ./${{ matrix.service }}/Containerfile
