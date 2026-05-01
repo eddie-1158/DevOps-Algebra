@@ -28,8 +28,8 @@ spec:
         runAsGroup: 10000
       containers:
         - name: frontend
-          image: ghcr.io/matej-basic/devops-algebra/frontend:v1.0.0
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/eddie-1158/devops-algebra/frontend:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           envFrom:

@@ -28,8 +28,8 @@ spec:
         runAsGroup: 10000
       containers:
         - name: worker
-          image: ghcr.io/matej-basic/devops-algebra/worker:v1.0.0
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/eddie-1158/devops-algebra/worker:main
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: app-config

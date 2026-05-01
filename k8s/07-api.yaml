@@ -41,8 +41,8 @@ spec:
               echo "Redis dostupan."
       containers:
         - name: api
-          image: ghcr.io/matej-basic/devops-algebra/api:v1.0.0
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/eddie-1158/devops-algebra/api:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
