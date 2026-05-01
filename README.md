@@ -144,15 +144,17 @@ kubectl create secret generic app-secrets \
   --from-literal=POSTGRES_PASSWORD=<jaka-lozinka>
 ```
 
-Ako koristiš GHCR privatni registar, stvori i pull secret:
+Budući da je registar privatan, obavezno stvori pull secret za ghcr.io:
 
 ```bash
-kubectl create secret docker-registry ghcr-pull-secret \
+kubectl create secret docker-registry ghcr-secret \
   --namespace ticketing \
   --docker-server=ghcr.io \
-  --docker-username=<github-korisnik> \
-  --docker-password=<github-token>
+  --docker-username=eddie-1158 \
+  --docker-password=<github-personal-access-token>
 ```
+
+Token mora imati scope `read:packages`. Isti token koji se koristi za CR_PAT u CI/CD-u odgovara ovoj svrsi.
 
 ### 2. Primjena svih manifesta
 
@@ -185,7 +187,7 @@ Svi podovi trebaju biti u statusu `Running` s oznakom `1/1` ili `2/2`.
 ```bash
 # Ažuriranje API servisa na novu verziju slike
 kubectl set image deployment/api \
-  api=ghcr.io/matej-basic/devops-algebra/api:v1.1.0 \
+  api=ghcr.io/eddie-1158/devops-algebra/api:v1.1.0 \
   -n ticketing
 
 # Praćenje napretka ažuriranja
@@ -193,10 +195,10 @@ kubectl rollout status deployment/api -n ticketing
 
 # Isti postupak vrijedi za frontend i worker
 kubectl set image deployment/frontend \
-  frontend=ghcr.io/matej-basic/devops-algebra/frontend:v1.1.0 \
+  frontend=ghcr.io/eddie-1158/devops-algebra/frontend:v1.1.0 \
   -n ticketing
 kubectl set image deployment/worker \
-  worker=ghcr.io/matej-basic/devops-algebra/worker:v1.1.0 \
+  worker=ghcr.io/eddie-1158/devops-algebra/worker:v1.1.0 \
   -n ticketing
 ```
 
