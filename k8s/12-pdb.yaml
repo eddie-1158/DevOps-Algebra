@@ -1,0 +1,24 @@
+# PodDisruptionBudget osigurava da rolling update ili održavanje čvora
+# ne smanji broj dostupnih replika ispod minimuma
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: api-pdb
+  namespace: ticketing
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: api
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: frontend-pdb
+  namespace: ticketing
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: frontend
